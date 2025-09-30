@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasa Palabra</title>
+
+    <link rel="stylesheet" href="src/css/output.css">
+    <link rel="stylesheet" href="src/css/lib/butterup.min.css">
+
+    <script type="module" src="src/js/acciones.js" defer></script>
+    <script src="src/js/lib/butterup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+</head>
+<body class="bg-gray-100 transition-all duration-200 ease-in-out">
+    <nav class="w-full bg-white h-14 justify-between items-center flex">
+        <div class="flex items-center" >
+            <h1 class=" text-4xl font-bold pl-10">Pasa Palabra</h1>
+        </div>
+        <div class="flex items-center justify-end pr-10">
+            <span id="cronometro2" class="hidden text-red-500 text-2xl font-bold px-2 "></span>
+            <div id="cronometro" class="text-gray-700 text-2xl font-bold"></div>
+            <button id="dark-mode" class="border-none outline-1 outline-white text-gray-800 font-bold py-2 px-4 rounded-2xl hover:bg-indigo-600 hover:text-white cursor-pointer flex items-center ml-5">
+                <svg id="sun-icon" class="size-5" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M6.995 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007s-2.246-5.007-5.007-5.007S6.995 9.239 6.995 12M11 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2H2zm17 0h3v2h-3zM5.637 19.778l-1.414-1.414l2.121-2.121l1.414 1.414zM16.242 6.344l2.122-2.122l1.414 1.414l-2.122 2.122zM6.344 7.759L4.223 5.637l1.415-1.414l2.12 2.122zm13.434 10.605l-1.414 1.414l-2.122-2.122l1.414-1.414z" />
+                </svg>
+                <svg id="moon-icon" class="size-5" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M12 11.807A9 9 0 0 1 10.049 2a9.94 9.94 0 0 0-5.12 2.735c-3.905 3.905-3.905 10.237 0 14.142c3.906 3.906 10.237 3.905 14.143 0a9.95 9.95 0 0 0 2.735-5.119A9 9 0 0 1 12 11.807" />
+                </svg>
+            </button>
+
+        </div>
+    </nav>
+
+    <div id="secciones" class=" grid grid-cols-[repeat(auto-fit,minmax(8rem,auto))] justify-center px-7 py-4 gap-1 w-full">
+        <button id="btn_general" class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4.667"
+                        d="M19.036 44q-1.47-4.793-4.435-7.147c-2.965-2.353-7.676-.89-9.416-3.318s1.219-6.892 2.257-9.526s-3.98-3.565-3.394-4.313q.585-.748 7.609-4.316Q13.652 4 26.398 4C39.144 4 44 14.806 44 21.68c0 6.872-5.88 14.276-14.256 15.873q-1.123 1.636 3.24 6.447" />
+                    <path stroke-linejoin="round" stroke-width="4"
+                        d="M19.5 14.5q-.981 3.801.583 5.339q1.563 1.537 5.328 2.01q-.855 4.903 2.083 4.6q2.937-.302 3.53-2.44q4.59 1.29 4.976-2.16c.385-3.45-1.475-6.201-2.238-6.201s-2.738-.093-2.738-1.148s-2.308-1.65-4.391-1.65s-.83-1.405-3.69-.85q-2.86.555-3.443 2.5Z"
+                        clip-rule="evenodd" />
+                    <path stroke-linecap="round" stroke-width="4"
+                        d="M30.5 25.5c-1.017.631-2.412 1.68-3 2.5c-1.469 2.05-2.66 3.298-2.92 4.608" />
+                </g>
+            </svg>
+            General
+        </button>
+        <button id="btn_deportes" class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M5.6 16.8q1.125-.875 1.763-2.125T8 12t-.638-2.675T5.6 7.2q-.775 1.05-1.187 2.275T4 12t.413 2.525T5.6 16.8M12 20q1.375 0 2.663-.437T17 18.25q-1.425-1.15-2.212-2.787T14 12t.788-3.463T17 5.75q-1.05-.875-2.337-1.312T12 4t-2.662.438T7 5.75Q8.425 6.9 9.213 8.538T10 12t-.788 3.463T7 18.25q1.05.875 2.338 1.313T12 20m6.4-3.2q.775-1.05 1.188-2.275T20 12t-.413-2.525T18.4 7.2q-1.125.875-1.763 2.125T16 12t.638 2.675T18.4 16.8M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+            </svg>
+            Deportes
+        </button>
+        <button id="btn_cultura_pop" class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M38.044 1.011c1.424-.16 3.084.296 4.136 1.675c1.262 1.654 1.99 3.89 2.445 6.158c.46 2.29.68 4.83.787 7.281a4.1 4.1 0 0 1 2.029 3.342c.046.81.079 1.796.079 2.975s-.033 2.165-.08 2.975a4.1 4.1 0 0 1-1.092 2.591q.17 1.36.171 2.768v.023c0 1.38 0 5.535-3.074 9.325c-3.141 3.872-9.084 6.895-19.946 6.895S6.696 43.996 3.555 40.124C.48 36.334.48 32.18.48 30.8v-.023c0-2.361.37-4.63 1.038-6.76a14 14 0 0 1-.037-1.047v-.542c0-2.993.02-6.664.377-10.087c.367-3.528 1.128-7.252 2.96-9.654C5.873 1.306 7.533.852 8.956 1.011c4.555.51 8.08 3.146 10.636 6.341a19 19 0 0 1 3.908-.416c1.306 0 2.615.144 3.909.416c2.556-3.195 6.081-5.83 10.636-6.34M5.54 24.443a2 2 0 0 1-.093.433a18.6 18.6 0 0 0-.964 5.9c0 1.222.019 4.161 2.18 6.826c2.114 2.605 6.68 5.414 16.837 5.414c10.155 0 14.722-2.81 16.836-5.414c2.161-2.665 2.18-5.605 2.18-6.826q0-.7-.052-1.388c-1.07.035-2.38.06-3.952.06c-2.046 0-3.65-.042-4.855-.094c-2.171-.094-3.944-1.703-4.073-3.937q-.026-.45-.045-.974h-3.07q-.02.524-.046.974c-.128 2.234-1.902 3.843-4.073 3.937c-1.205.052-2.81.094-4.855.094s-3.651-.042-4.856-.094c-2.171-.094-3.944-1.703-4.073-3.937q-.026-.45-.045-.974zm-.05-4.003c.019-2.49.088-5.174.35-7.685c.364-3.497 1.066-6.205 2.162-7.64a.3.3 0 0 1 .135-.089a.8.8 0 0 1 .372-.036c3.533.395 6.426 2.645 8.643 5.777c.49.69 1.36.999 2.175.77a15.5 15.5 0 0 1 4.173-.597c1.364 0 2.768.203 4.172.597a2 2 0 0 0 2.175-.77c2.217-3.132 5.11-5.382 8.643-5.777a.8.8 0 0 1 .372.036c.083.03.118.066.136.089c.71.931 1.29 2.457 1.702 4.516c.354 1.766.557 3.77.671 5.835a126 126 0 0 0-2.859-.03c-2.046 0-3.65.042-4.855.093c-2.171.094-3.944 1.704-4.073 3.938q-.026.45-.045.973h-3.07q-.02-.524-.046-.973c-.128-2.234-1.902-3.844-4.073-3.938c-1.205-.052-2.81-.093-4.855-.093s-3.651.041-4.856.093c-2.171.094-3.944 1.704-4.073 3.938q-.026.45-.045.973zm3.62 13.023a2 2 0 0 0-.151 2.827c1.94 2.158 5.16 3.855 10.311 4.442a2.002 2.002 0 1 0 .454-3.977c-4.481-.511-6.68-1.908-7.788-3.141a2 2 0 0 0-2.826-.151"
+                    clip-rule="evenodd" />
+            </svg>
+            Cultura Pop
+        </button>
+        <button id="btn_tecnologia" class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                <path fill="currentColor"
+                    d="M27.43 6.1h-1.52v19.81h1.52v-1.53H32v-1.52h-4.57v-3.05H32v-1.52h-4.57v-4.57H32v-1.53h-4.57V9.15H32V7.62h-4.57zM6.1 25.91v1.52h1.52V32h1.52v-4.57h3.05V32h1.53v-4.57h4.57V32h1.52v-4.57h3.05V32h1.52v-4.57h1.53v-1.52zM22.86 7.62H9.14v1.53H7.62v13.71h1.52v-1.52h3.05v-1.53h3.05v-1.52h1.52v-1.52h1.53v-1.53h1.52v-1.52h1.52v-3.05h1.53v12.19h1.52V9.15h-1.52Zm-9.14 7.62h-3.05v-1.52h3.05Zm4.57-3.05h-7.62v-1.52h7.62ZM9.14 22.86h13.72v1.52H9.14Z" />
+                <path fill="currentColor"
+                    d="M19.81 19.81h1.52v1.53h-1.52Zm-3.05 0h1.53v1.53h-1.53ZM25.91 6.1V4.58h-1.53V0h-1.52v4.58h-3.05V0h-1.52v4.58h-4.57V0h-1.53v4.58H9.14V0H7.62v4.58H6.1V6.1zM6.1 6.1H4.57v1.52H0v1.53h4.57v3.04H0v1.53h4.57v4.57H0v1.52h4.57v3.05H0v1.52h4.57v1.53H6.1z" />
+            </svg>
+            Tecnologia
+        </button>
+        <button id="btn_ciencia" class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="M9.759 12.009a2.25 2.25 0 1 0 4.5 0a2.25 2.25 0 0 0-4.5 0" />
+                    <path
+                        d="M1.403 22.616c.984.985 3.046.812 5.731-.481s5.775-3.6 8.588-6.413s5.12-5.902 6.412-8.587c1.293-2.686 1.466-4.747.482-5.732c-.985-.984-3.046-.811-5.732.482c-2.685 1.293-5.774 3.6-8.587 6.412c-2.813 2.813-5.12 5.902-6.413 8.588s-1.466 4.747-.481 5.731" />
+                    <path
+                        d="M8.297 15.722a40 40 0 0 0 4.341 3.777c1.474 1.1 2.917 1.996 4.246 2.636s2.52 1.012 3.504 1.095c.983.082 1.74-.126 2.228-.614c.487-.487.696-1.244.613-2.228c-.082-.983-.455-2.174-1.095-3.503s-1.536-2.773-2.636-4.246a40 40 0 0 0-3.776-4.342a40 40 0 0 0-4.342-3.776c-1.473-1.1-2.916-1.996-4.246-2.636S4.614.872 3.631.79s-1.74.126-2.228.613C.915 1.891.707 2.648.789 3.631c.083.984.455 2.174 1.095 3.504S3.42 9.907 4.521 11.38a40 40 0 0 0 3.776 4.341" />
+                </g>
+            </svg>Ciencia
+        </button>
+        <button id="btn_geografia" class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 2048 2048">
+                <path fill="currentColor"
+                    d="M496 883q13 0 29 4t32 11t32 13t29 12l-16 2q-8 1-17 1q-17 0-31-5t-26-13t-24-12t-22-6q-10 0-18 4t-16 9q0-4-7-4q7-7 26-11t29-5m135 45q41 0 75 14q-14 5-28 8t-29 4q-20 0-36-4q5-8 10-10t8-12M1024 0q141 0 271 37t244 103t208 161t160 207t104 244t37 272q0 141-37 271t-103 244t-161 208t-207 160t-244 104t-272 37q-141 0-271-37t-244-103t-208-161t-160-207t-104-244t-37-272q0-141 37-271t103-244t161-208t207-160T752 37t272-37m762 555q-14-22-28-42t-29-41q-2 9-5 13t-4 18q0 9 7 17t18 16t22 12t19 7m-69-98q0 8-3 11h6q4 0 6 1zm-693 1463q114 0 223-29t206-82t180-130t145-172q-13-30-25-61t-12-64q0-36 3-58t7-39t4-29t-3-31t-17-41t-37-62q1-7 3-19t4-25t1-24t-5-19q-26-3-54-11t-50-24l6-5q-13 3-26 8t-25 11t-26 8t-27 4l-16-2l3-7q-14 4-30 10t-31 6q-10 0-29-7t-38-17t-34-22t-15-23l2-3q-5-6-13-11t-15-10t-13-11t-5-14l11-9l-23-3l-8-30q2 5 9 4t11-4l-36-19l25-64q-14-52-7-80t27-46t44-36t49-49l-3-12l66-80l15-2q28 0 63-2t71-7t71-10t64-13q-32-38-67-72t-75-65q-11 4-27 11t-32 18t-25 24t-11 27l6 19q-18 29-40 36t-45 8t-48 0t-48 9l-16-34l15-58l-17-25l173-54q-11-28-36-42t-55-14v-10l56-9q-93-46-193-70t-205-24q-87 0-172 17t-164 49t-153 80t-135 108q26 0 40 13t26 29t25 29t35 14l16-12l-2-22l33-47l-26-74q5-3 15-10t17-7q30 0 46 3t28 11t21 23t28 38l36-28q10 4 32 13t45 22t39 27t17 26q0 15-11 24t-29 15t-37 9t-38 8t-29 10t-12 17l58 19q-20 17-43 31t-48 26l4 17l-92 36v28l-7 3l5-35l-4-1q-7 0-8 3t-1 7t2 8t1 6l-13-7l2 4q0 3 3 9t8 11t8 10t4 5q0 3-4 6t-10 4t-8 3t0 1q14 0 6 2t-25 10t-31 23t-16 44q0 17 1 33t-1 33q-14-38-42-58t-68-20l-43 4l21 14q-17-2-35-4t-37-1t-34 8t-30 21l-6 45q0 32 14 52t49 21q30 0 59-9t57-21q-9 22-20 42t-16 44l13 6q24-16 44-5t39 32t39 43t43 32l-34 18l-80-45q1 2 2 9t-1 3l-36-61q-32-1-68-10t-73-24t-69-33t-59-38l-7 107q0 122 33 238t93 218t147 186t193 143q-5-21-1-42t10-42t13-42t7-43q0-32-10-67t-24-71t-31-71t-27-66t-16-58t6-47l-15-7q6-14 16-27t21-26t17-28t7-30q0-10-4-21t-7-21l21 5q17-39 46-53t73-15q5 0 21 4t34 11t34 11t24 8q0 7 8 9t9 7l-2 8q3 1 14 7t24 15t23 16t14 11q18 0 49 12t68 30t73 43t68 50t49 50t20 44l-34 36q4 51-7 78t-34 45t-53 30t-65 34q0 20-10 43t-25 44t-36 35t-42 14l-42-32q2 2 0 7t-5 2q10 19 5 44t-17 51t-27 49t-27 39q54 14 108 21t109 7" />
+            </svg>
+            Geografía
+        </button>
+        <button id="btn_idiomas"
+            class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2 5h14M9 2v3m4 0q-2 8-9 11m2-7q2 4 6 6m1 7l5-11l5 11m-1.4-3h-7.2" />
+            </svg>
+            Idiomas
+        </button>
+        <button id="btn_historia"
+            class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+                <path fill="currentColor"
+                    d="M271.9 20.2c-9.8-5.6-21.9-5.6-31.8 0l-224 128c-12.6 7.2-18.8 22-15.1 36S17.5 208 32 208h32v208l-51.2 38.4C4.7 460.4 0 469.9 0 480c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32c0-10.1-4.7-19.6-12.8-25.6L448 416V208h32c14.5 0 27.2-9.8 30.9-23.8s-2.5-28.8-15.1-36l-224-128zM400 208v208h-64V208zm-112 0v208h-64V208zm-112 0v208h-64V208zm80-112a32 32 0 1 1 0 64a32 32 0 1 1 0-64" />
+            </svg>
+            Historia
+        </button>
+        <!-- <button id="btn_anime"
+            class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="4">
+                    <path d="M44 24H30c0-3.31-2.69-6-6-6s-6 2.69-6 6H4C4 12.95 12.95 4 24 4s20 8.95 20 20Z" />
+                    <path stroke-linecap="round" d="M18 24H4c0 11.05 8.95 20 20 20s20-8.95 20-20H30" />
+                    <path d="M24 30a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" />
+                </g>
+            </svg>
+            Anime y manga
+        </button> -->
+        <!-- <button id="btn_astronomia"
+            class="bt_seccion text-center flex flex-row gap-2 items-center text-gray-500 text-[17px] font-semibold py-1 px-4 rounded-md hover:bg-gray-800 hover:text-white cursor-pointer active:bg-gray-800 active:text-white  focus:text-white transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                    <path stroke-linejoin="round" d="m7 8l-4 4l4 4" />
+                    <path d="m10.5 18l3-12" />
+                    <path stroke-linejoin="round" d="m17 8l4 4l-4 4" />
+                </g>
+            </svg>
+            Informática
+        </button> -->
+    </div>
+
+    <div class="container grid grid-cols-1 gap-4 mx-auto mt-10 h-full text-center items-center justify-items-center">
+        <div class="flex flex-row gap-4">
+            <p class="bg-white text-4xl grid rounded-2xl px-4 py-2 font-bold ring-4 ring-indigo-600 justify-center text-center items-center  text-indigo-900" id="letra"></p>
+        </div>
+        <div class="">
+            <div id="descripcion" class="flex flex-col gap-4 p-8 bg-white rounded-2xl text-center items-center justify-items-center shadow-lg">
+                <p id="descripcion-text" class="text-gray-700 text-2xl font-semibold"></p>
+                <input type="text" name="" id="respuesta" class="border-2 border-gray-300 rounded-2xl text-[20px] p-2 w-1/2 text-center focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent" placeholder="Escribe tu respuesta aqui">
+                <div class="flex flex-row gap-4 py-4">
+                    
+                    <button id="btn_pausa" class="rounded-2xl py-1 px-3 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white cursor-pointer"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20">
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M6.75 3a2 2 0 0 0-2 2v10a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2Zm6.5 0a2 2 0 0 0-2 2v10a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <button id="btn_reanudar" class="rounded-2xl py-1 px-3 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48">
+                        <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
+                            <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
+                            <path d="M20 24v-6.928l6 3.464L32 24l-6 3.464l-6 3.464z" />
+                        </g>
+                    </svg>
+                </button>
+                <button id="btn_cambiar_pregunta"
+                    class="rounded-2xl py-1 px-3 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="m12.05 19l2.85-2.825l-2.85-2.825L11 14.4l1.075 1.075q-.7.025-1.362-.225t-1.188-.775q-.5-.5-.763-1.15t-.262-1.3q0-.425.113-.85t.312-.825l-1.1-1.1q-.425.625-.625 1.325T7 12q0 .95.375 1.875t1.1 1.65t1.625 1.088t1.85.387l-.95.95zm4.125-4.25q.425-.625.625-1.325T17 12q0-.95-.363-1.888T15.55 8.45t-1.638-1.075t-1.862-.35L13 6.05L11.95 5L9.1 7.825l2.85 2.825L13 9.6l-1.1-1.1q.675 0 1.375.263t1.2.762t.763 1.15t.262 1.3q0 .425-.112.85t-.313.825zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8" />
+                    </svg>
+                </button>
+                <button id="btn_validar" class="rounded-2xl text-[20px] font-bold text-center items-center justify-center py-2 px-3 bg-indigo-600 hover:bg-indigo-800 text-white cursor-pointer">Validar</button>
+                <button id="btn-refrescar_pagina" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-2xl cursor-pointer">
+                    Reiniciar Juego
+                </button>
+                </div>
+            </div>
+        </div>
+        <div id="modal-tiempo" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-96 text-center">
+                <h2 class="text-xl font-bold mb-4">⏰ Tiempo terminado</h2>
+                <p class="mb-6">Se acabó el tiempo del cronómetro.</p>
+                <button id="btn-refrescar" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md">
+                    Reiniciar Juego
+                </button>
+            </div>
+        </div>
+
+        <!-- <div id="tabla_resultados">
+            <div id="tabla_de_resultados" class="table-auto bg-white rounded-2xl p-8 shadow-lg">
+                <table class="table-auto md:table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-300 px-4 py-2">Usuario</th>
+                            <th class="border-gray-300 px-4 py-2">Palabras Correctas</th>
+                            <th class="border-gray-300 px-4 py-2">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+        
+    </div>
+</body>
+</html>

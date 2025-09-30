@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@font-face {
+    font-family: 'DarkerGrotesque';
+    src: url('../font/DarkerGrotesque-VariableFont_wght.ttf') format('truetype');
+}
+
+body{
+    font-family: 'DarkerGrotesque', sans-serif;
+}
+.dark body {
+    @apply bg-gray-900 text-white transition-all duration-200
+}
+.dark nav {
+    @apply bg-gray-800 text-white  transition-all duration-200;
+}
+.dark #descripcion, .dark #tabla_de_resultados, .dark #letra, .dark #modal-tiempo {
+    @apply bg-gray-800 text-white  transition-all duration-200;
+}
+.dark #descripcion-text {
+    @apply text-gray-300  transition-all duration-200;
+}
+.dark #respuesta {
+    @apply bg-gray-700 text-white border-gray-600 placeholder-gray-400  transition-all duration-200;
+}
+.dark #cronometro {
+    @apply text-gray-300  transition-all duration-200;
+}
+.dark #dark-mode, .dark .bt_seccion {
+    @apply text-white outline-none  transition-all duration-200;
+}
+.dark .bt_seccion {
+    @apply text-gray-500;
+}
+.dark #moon-icon {
+    @apply block  transition-all duration-200;
+}
+#moon-icon {
+    @apply hidden  transition-all duration-200;
+}
+.dark #sun-icon {
+    @apply hidden  transition-all duration-200;
+}
+.dark #btn_pausa, .dark #btn_reanudar, .dark #btn_cambiar_pregunta {
+    @apply bg-gray-700 text-white  transition-all duration-200;
+}
+.dark #btn_pausa:hover, .dark #btn_reanudar:hover,.dark #btn_cambiar_pregunta:hover, .dark .bt_seccion:hover, .dark .bt_seccion:focus {
+    @apply bg-gray-600 text-white  transition-all duration-200;
+}
+.activo, .dark .activo {
+    @apply bg-gray-700 text-white;
+    @apply dark:bg-gray-700 dark:text-white;
+  }
